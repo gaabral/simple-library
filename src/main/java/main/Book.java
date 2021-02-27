@@ -1,7 +1,7 @@
+package main;
+
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
-
-import java.util.Objects;
 
 @ToString
 @EqualsAndHashCode
@@ -14,17 +14,5 @@ public class Book {
         this.title = title;
         this.author = author;
         this.year = year;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public String getAuthor() {
-        return author;
-    }
-
-    public int getYear() {
-        return year;
     }
 }
