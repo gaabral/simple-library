@@ -1,23 +1,29 @@
-package main;
+package main.data;
 
+import main.model.Book;
+import main.model.Copy;
 import utils.LibraryException;
 import utils.MyIdSequence;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.function.Predicate;
 
 public class LibraryData {
     private static final MyIdSequence idSequence = new MyIdSequence();
-    private List<Copy> library = new ArrayList<>();
+    private final List<Copy> library = new ArrayList<>();
 
     public Copy findAvailableCopy(Long id) throws LibraryException {
         return library.stream()
                 .filter(isCopyAvailable(id))
                 .findFirst()
                 .orElseThrow(() -> new LibraryException("Given copy is not available for lent"));
+    }
+
+    public Copy findCopy(Long id) throws LibraryException {
+        return library.stream()
+                .filter(x -> id == x.getId())
+                .findFirst()
+                .orElseThrow(() -> new LibraryException("Given copy is does not exist"));
     }
 
     public Map<Book, Integer> indexCopies() {
@@ -42,6 +48,13 @@ public class LibraryData {
 
     public void addCopy(Book book) {
         library.add(new Copy(book, idSequence));
+    }
+
+    public Optional<Book> searchBy(Predicate<Book> condition){
+        return library.stream()
+                .map(Copy::getBook)
+                .filter(condition)
+                .findFirst();
     }
 
     private Predicate<Copy> isCopyAvailable(long id) {

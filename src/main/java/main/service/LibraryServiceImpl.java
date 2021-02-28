@@ -1,5 +1,8 @@
-package main;
+package main.service;
 
+import main.data.LibraryData;
+import main.model.Book;
+import main.model.Copy;
 import utils.LibraryException;
 
 import java.util.Map;
@@ -11,6 +14,7 @@ public class LibraryServiceImpl implements LibraryService {
         this.libraryData = libraryData;
     }
 
+    @Override
     public Copy lendACopy(long id, String clientName) throws LibraryException {
         Copy toBeLent = libraryData.findAvailableCopy(id);
         toBeLent.setBorrowerName(clientName);
@@ -18,19 +22,26 @@ public class LibraryServiceImpl implements LibraryService {
         return toBeLent;
     }
 
+    @Override
     public Map<Book, Integer> listAvailableTitles() {
         return libraryData.indexCopies();
     }
 
+    @Override
     public void removeACopyFromLibrary(long id) {
         libraryData.removeCopy(id);
     }
 
+    @Override
     public void addNewBookToLibrary(Book book, int numberOfCopies) {
         for (int i = 0; i < numberOfCopies; i++) {
             libraryData.addCopy(book);
         }
     }
 
+    @Override
+    public Copy seeDetails(long id) throws LibraryException {
+        return libraryData.findCopy(id);
+    }
 
 }

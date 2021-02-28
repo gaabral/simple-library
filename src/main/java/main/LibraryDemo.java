@@ -1,6 +1,16 @@
 package main;
 
-import java.util.*;
+import main.model.Book;
+import main.model.Copy;
+import main.data.LibraryData;
+import main.service.LibraryService;
+import main.service.LibraryServiceImpl;
+
+import java.util.Map;
+import java.util.Optional;
+
+import static main.search.ByAuthor.byAuthor;
+import static main.search.ByTitle.byTitle;
 
 public class LibraryDemo {
 
@@ -22,9 +32,12 @@ public class LibraryDemo {
         Map<Book, Integer> availableForLenting2 = libraryService.listAvailableTitles();
         System.out.println(availableForLenting2);
 
+        System.out.println("######################################");
+
+        Optional<Book> x = libraryData.searchBy(byAuthor("Jane Austen").and(byTitle("ss")));
+        System.out.println(x.get());
 
     }
-
 
 
 }
