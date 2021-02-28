@@ -7,10 +7,15 @@ import utils.MyIdSequence;
 
 import java.util.*;
 import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
 public class LibraryData {
-    private static final MyIdSequence idSequence = new MyIdSequence();
+    private final MyIdSequence idSequence;
     private final List<Copy> library = new ArrayList<>();
+
+    public LibraryData(MyIdSequence idSequence) {
+        this.idSequence = idSequence;
+    }
 
     public Copy findAvailableCopy(Long id) throws LibraryException {
         return library.stream()
@@ -26,7 +31,7 @@ public class LibraryData {
                 .orElseThrow(() -> new LibraryException("Given copy is does not exist"));
     }
 
-    public Map<Book, Integer> indexCopies() {
+    public Map<Book, Integer> indexCopiesByBookAndAvailableQty() {
         Map<Book, Integer> libraryListing = new HashMap<>();
 
         for (Copy copy : library) {
@@ -42,19 +47,20 @@ public class LibraryData {
         return libraryListing;
     }
 
-    public void removeCopy(long id) {
-        library.removeIf(isCopyAvailable(id));
+    public boolean removeCopy(long id) {
+        return library.removeIf(isCopyAvailable(id));
     }
 
     public void addCopy(Book book) {
         library.add(new Copy(book, idSequence));
     }
 
-    public Optional<Book> searchBy(Predicate<Book> condition){
+    public List<Book> searchBy(Predicate<Book> condition){
         return library.stream()
                 .map(Copy::getBook)
                 .filter(condition)
-                .findFirst();
+                .distinct()
+                .collect(Collectors.toList());
     }
 
     private Predicate<Copy> isCopyAvailable(long id) {
