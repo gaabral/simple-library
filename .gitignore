@@ -8,9 +8,9 @@
 *.iml
 *.iws
 
-# Maven
-log/
-target/
+### Gradle ###
+.gradle
+/build/
 
 # Inclusions
 !lib/**
