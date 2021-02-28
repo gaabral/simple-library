@@ -1,7 +1,7 @@
-package main.search;
+package com.library.search;
 
 import lombok.experimental.UtilityClass;
-import main.model.Book;
+import com.library.model.Book;
 
 import java.util.function.Predicate;
 

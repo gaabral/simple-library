@@ -1,9 +1,9 @@
-package main.service;
+package com.library.service;
 
 import junit.framework.TestCase;
-import main.data.LibraryData;
-import main.model.Book;
-import main.model.Copy;
+import com.library.data.LibraryData;
+import com.library.model.Book;
+import com.library.model.Copy;
 import utils.LibraryException;
 import utils.MyIdSequence;
 

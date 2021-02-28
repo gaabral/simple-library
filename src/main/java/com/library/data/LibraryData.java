@@ -1,7 +1,7 @@
-package main.data;
+package com.library.data;
 
-import main.model.Book;
-import main.model.Copy;
+import com.library.model.Book;
+import com.library.model.Copy;
 import utils.LibraryException;
 import utils.MyIdSequence;
 

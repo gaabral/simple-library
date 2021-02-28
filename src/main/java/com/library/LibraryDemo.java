@@ -1,18 +1,18 @@
-package main;
+package com.library;
 
-import main.data.LibraryData;
-import main.model.Book;
-import main.model.Copy;
-import main.service.LibraryService;
-import main.service.LibraryServiceImpl;
+import com.library.service.LibraryService;
+import com.library.data.LibraryData;
+import com.library.model.Book;
+import com.library.model.Copy;
+import com.library.service.LibraryServiceImpl;
 import utils.MyIdSequence;
 
 import java.util.List;
 import java.util.Map;
 
-import static main.search.ByAuthor.byAuthor;
-import static main.search.ByPublishYear.byPublishYear;
-import static main.search.ByTitle.byTitle;
+import static com.library.search.ByAuthor.byAuthor;
+import static com.library.search.ByPublishYear.byPublishYear;
+import static com.library.search.ByTitle.byTitle;
 
 public class LibraryDemo {
 

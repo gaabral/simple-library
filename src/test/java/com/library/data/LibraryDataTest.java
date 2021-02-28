@@ -1,17 +1,17 @@
-package main.data;
+package com.library.data;
 
+import com.library.model.Book;
+import com.library.model.Copy;
+import com.library.search.ByAuthor;
 import junit.framework.TestCase;
-import main.model.Book;
-import main.model.Copy;
 import utils.LibraryException;
 import utils.MyIdSequence;
 
 import java.util.List;
 import java.util.Map;
 
-import static main.search.ByAuthor.byAuthor;
-import static main.search.ByPublishYear.byPublishYear;
-import static main.search.ByTitle.byTitle;
+import static com.library.search.ByPublishYear.byPublishYear;
+import static com.library.search.ByTitle.byTitle;
 import static org.junit.Assert.assertThrows;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
@@ -92,7 +92,7 @@ public class LibraryDataTest extends TestCase {
     }
 
     public void testSearchByAuthor() {
-        List<Book> result = underTest.searchBy(byAuthor("John Lennon"));
+        List<Book> result = underTest.searchBy(ByAuthor.byAuthor("John Lennon"));
         assertFalse(result.isEmpty());
         assertEquals(2, result.size());
     }
@@ -111,7 +111,7 @@ public class LibraryDataTest extends TestCase {
     }
 
     public void testSearchByTitleAndAuthor() {
-        List<Book> result = underTest.searchBy(byTitle("book1").and(byAuthor("John Du")));
+        List<Book> result = underTest.searchBy(byTitle("book1").and(ByAuthor.byAuthor("John Du")));
         assertFalse(result.isEmpty());
         assertEquals(1, result.size());
         assertSame(book1, result.get(0));
