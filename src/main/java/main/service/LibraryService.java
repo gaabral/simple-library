@@ -11,7 +11,7 @@ public interface LibraryService {
 
     Map<Book, Integer> listAvailableTitles();
 
-    void removeACopyFromLibrary(long id);
+    boolean removeACopyFromLibrary(long id);
 
     void addNewBookToLibrary(Book book, int numberOfCopies);
 

@@ -8,7 +8,7 @@ import utils.LibraryException;
 import java.util.Map;
 
 public class LibraryServiceImpl implements LibraryService {
-    private LibraryData libraryData;
+    private final LibraryData libraryData;
 
     public LibraryServiceImpl(LibraryData libraryData) {
         this.libraryData = libraryData;
@@ -24,12 +24,12 @@ public class LibraryServiceImpl implements LibraryService {
 
     @Override
     public Map<Book, Integer> listAvailableTitles() {
-        return libraryData.indexCopies();
+        return libraryData.indexCopiesByBookAndAvailableQty();
     }
 
     @Override
-    public void removeACopyFromLibrary(long id) {
-        libraryData.removeCopy(id);
+    public boolean removeACopyFromLibrary(long id) {
+       return libraryData.removeCopy(id);
     }
 
     @Override
